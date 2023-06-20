@@ -1,47 +1,35 @@
-# 🏎️ [Porsche Digital](https://app.usebraintrust.com/r/timothy7/) is hiring developers for $120/hour
-
-100% Remote. 40 hours/week. [👉 Click to apply](https://app.usebraintrust.com/r/timothy7/)
-
-- [👉 Senior Frontend Engineer](https://app.usebraintrust.com/r/timothy7/?job_id=4145) - 💵 $120/hour
-
-- [👉 QA Architect](https://app.usebraintrust.com/r/timothy7/?job_id=4146) - 💵 $120/hour
-
-Many more positions available. [📧 Send me an email](mailto:porschejobs@timknowsbest.com) for more information.
-
 <p align="center"><a href="https://timknowsbest.com/free-dynamic-dns" target="_blank" rel="noopener noreferrer"><img width="1024" src="feature-graphic.jpg" alt="Cloudflare DDNS"/></a></p>
 
 # 🚀 Cloudflare DDNS
 
 Access your home network remotely via a custom domain name without a static IP!
 
-A small, 🕵️ privacy centric, and ⚡ lightning fast multi-architecture Docker image for self hosting projects.
+## ⚡ Efficiency
 
-## 🇺🇸 Origin
+- ❤️ Easy config. List your domains and you're done.
+- 🔁 The Python runtime will re-use existing HTTP connections.
+- 🗃️ Cloudflare API responses are cached to reduce API usage.
+- 🤏 The Docker image is small and efficient.
+- 0️⃣ Zero dependencies.
+- 💪 Supports all platforms.
+- 🏠 Enables low cost self hosting to promote a more decentralized internet.
+- 🔒 Zero-log IP provider ([cdn-cgi/trace](https://www.cloudflare.com/cdn-cgi/trace))
+- 👐 GPL-3.0 License. Open source for open audits.
 
-This script was written for the Raspberry Pi platform to enable low cost self hosting to promote a more decentralized internet.
+## 💯 Complete Support of Domain Names, Subdomains, IPv4 & IPv6, and Load Balancing
 
-### 🧹 Safe for use with existing records
-
-`cloudflare-ddns` handles the busy work for you, so deploying web apps is less of a clickfest. Every 5 minutes, the script fetches public IPv4 and IPv6 addresses and then creates/updates DNS records for each subdomain in Cloudflare.
-
-#### Optional features
-
-Stale, duplicate DNS records are removed for housekeeping.
+- 🌐 Supports multiple domains (zones) on the same IP.
+- 📠 Supports multiple subdomains on the same IP.
+- 📡 IPv4 and IPv6 support.
+- 🌍 Supports all Cloudflare regions.
+- ⚖️ Supports [Cloudflare Load Balancing](https://developers.cloudflare.com/load-balancing/understand-basics/pools/).
+- 🇺🇸 Made in the U.S.A.
 
 ## 📊 Stats
 
 | Size                                                                                                                                                                                                                           | Downloads                                                                                                                                                                                         | Discord                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [![cloudflare-ddns docker image size](https://img.shields.io/docker/image-size/timothyjmiller/cloudflare-ddns?style=flat-square)](https://hub.docker.com/r/timothyjmiller/cloudflare-ddns 'cloudflare-ddns docker image size') | [![Total DockerHub pulls](https://img.shields.io/docker/pulls/timothyjmiller/cloudflare-ddns?style=flat-square)](https://hub.docker.com/r/timothyjmiller/cloudflare-ddns 'Total DockerHub pulls') | [![Official Discord Server](https://img.shields.io/discord/785778163887112192?style=flat-square)](https://discord.gg/UgGmwMvNxm 'Official Discord Server') |
-
-## ⁉️ How Private & Secure?
-
-1. Uses zero-log external IPv4 & IPv6 provider ([cdn-cgi/trace](https://www.cloudflare.com/cdn-cgi/trace))
-2. Alpine Linux base image
-3. HTTPS only via Python Software Foundation requests module
-4. Docker runtime
-5. Open source for open audits
-6. Regular updates
 
 ## 🚦 Getting Started
 
@@ -73,7 +61,7 @@ Alternatively, you can use the traditional API keys by setting appropriate value
     "account_email": "The email address you use to sign in to cloudflare",
 ```
 
-### Enable or disable IPv4 or IPv6
+### 📍 Enable or disable IPv4 or IPv6
 
 Some ISP provided modems only allow port forwarding over IPv4 or IPv6. In this case, you would want to disable any interface not accessible via port forward.
 
@@ -82,7 +70,7 @@ Some ISP provided modems only allow port forwarding over IPv4 or IPv6. In this c
 "aaaa": true
 ```
 
-### Other values explained
+### 🎛️ Other values explained
 
 ```json
 "zone_id": "The ID of the zone that will get the records. From your dashboard click into the zone. Under the overview tab, scroll down and the zone ID is listed in the right rail",
@@ -93,17 +81,118 @@ Some ISP provided modems only allow port forwarding over IPv4 or IPv6. In this c
 
 ## 📠 Hosting multiple subdomains on the same IP?
 
-You can save yourself some trouble when hosting multiple domains pointing to the same IP address (in the case of Traefik) by defining one A & AAAA record 'ddns.example.com' pointing to the IP of the server that will be updated by this DDNS script. For each subdomain, create a CNAME record pointing to 'ddns.example.com'. Now you don't have to manually modify the script config every time you add a new subdomain to your site!
+This script can be used to update multiple subdomains on the same IP address.
 
-## 🌐 Hosting multiple domains (zones) on the same IP?
-
-You can handle ddns for multiple domains (cloudflare zones) using the same docker container by separating your configs inside `config.json` like below:
+For example, if you have a domain `example.com` and you want to host additional subdomains at `foo.example.com` and `bar.example.com` on the same IP address, you can use this script to update the DNS records for all subdomains.
 
 ### ⚠️ Note
 
+Please remove the comments after `//` in the below example. They are only there to explain the config.
+
 Do not include the base domain name in your `subdomains` config. Do not use the [FQDN](https://en.wikipedia.org/wiki/Fully_qualified_domain_name).
 
+### 👉 Example 🚀
+
 ```bash
+{
+  "cloudflare": [
+    {
+      "authentication": {
+        "api_token": "api_token_here", // Either api_token or api_key
+        "api_key": {
+          "api_key": "api_key_here",
+          "account_email": "your_email_here"
+        }
+      },
+      "zone_id": "your_zone_id_here",
+      "subdomains": [
+        {
+          "name": "", // Root domain (example.com)
+          "proxied": true
+        },
+        {
+          "name": "foo", // (foo.example.com)
+          "proxied": true
+        },
+        {
+          "name": "bar", // (bar.example.com)
+          "proxied": true
+        }
+      ]
+    }
+  ],
+  "a": true,
+  "aaaa": true,
+  "purgeUnknownRecords": false,
+  "ttl": 300
+}
+```
+
+## 🌐 Hosting multiple domains (zones) on the same IP?
+
+You can handle ddns for multiple domains (cloudflare zones) using the same docker container by duplicating your configs inside the `cloudflare: []` key within `config.json` like below:
+
+### ⚠️ Note:
+
+If you are using API Tokens, make sure the token used supports editing your zone ID.
+
+```bash
+{
+  "cloudflare": [
+    {
+      "authentication": {
+        "api_token": "api_token_here",
+        "api_key": {
+          "api_key": "api_key_here",
+          "account_email": "your_email_here"
+        }
+      },
+      "zone_id": "your_first_zone_id_here",
+      "subdomains": [
+        {
+          "name": "",
+          "proxied": false
+        },
+        {
+          "name": "remove_or_replace_with_your_subdomain",
+          "proxied": false
+        }
+      ]
+    },
+    {
+      "authentication": {
+        "api_token": "api_token_here",
+        "api_key": {
+          "api_key": "api_key_here",
+          "account_email": "your_email_here"
+        }
+      },
+      "zone_id": "your_second_zone_id_here",
+      "subdomains": [
+        {
+          "name": "",
+          "proxied": false
+        },
+        {
+          "name": "remove_or_replace_with_your_subdomain",
+          "proxied": false
+        }
+      ]
+    }
+  ],
+  "a": true,
+  "aaaa": true,
+  "purgeUnknownRecords": false
+}
+```
+
+## ⚖️ Load Balancing
+
+If you have multiple IP addresses and want to load balance between them, you can use the `loadBalancing` option. This will create a CNAME record for each subdomain that points to the subdomain with the lowest IP address.
+
+### 📜 Example config to support load balancing
+
+```json
 {
   "cloudflare": [
     {
@@ -126,16 +215,57 @@ Do not include the base domain name in your `subdomains` config. Do not use the 
         }
       ]
     }
+  ],{
+  "cloudflare": [
+    {
+      "authentication": {
+        "api_token": "api_token_here",
+        "api_key": {
+          "api_key": "api_key_here",
+          "account_email": "your_email_here"
+        }
+      },
+      "zone_id": "your_zone_id_here",
+      "subdomains": [
+        {
+          "name": "",
+          "proxied": false
+        },
+        {
+          "name": "remove_or_replace_with_your_subdomain",
+          "proxied": false
+        }
+      ]
+    }
+  ],
+  "load_balancer": [
+    {
+      "authentication": {
+        "api_token": "api_token_here",
+        "api_key": {
+          "api_key": "api_key_here",
+          "account_email": "your_email_here"
+        }
+      },
+      "pool_id": "your_pool_id_here",
+      "origin": "your_origin_name_here"
+    }
   ],
   "a": true,
   "aaaa": true,
-  "purgeUnknownRecords": false
+  "purgeUnknownRecords": false,
+  "ttl": 300
+}
+  "a": true,
+  "aaaa": true,
+  "purgeUnknownRecords": false,
+  "ttl": 300
 }
 ```
 
-### 🗣️ Call to action: Docker environment variable support
+### 🧹 Optional features
 
-I am looking for help adding Docker environment variable support to this project. If interested, check out [this comment](https://github.com/timothymiller/cloudflare-ddns/pull/35#issuecomment-974752476) and open a PR.
+`purgeUnknownRecords` removes stale DNS records from Cloudflare. This is useful if you have a dynamic DNS record that you no longer want to use. If you have a dynamic DNS record that you no longer want to use, you can set `purgeUnknownRecords` to `true` and the script will remove the stale DNS record from Cloudflare.
 
 ## 🐳 Deploy with Docker Compose
 
@@ -144,7 +274,7 @@ Pre-compiled images are available via [the official docker container on DockerHu
 Modify the host file path of config.json inside the volumes section of docker-compose.yml.
 
 ```yml
-version: '3.7'
+version: '3.9'
 services:
   cloudflare-ddns:
     image: timothyjmiller/cloudflare-ddns:latest
@@ -270,6 +400,20 @@ Recommended for production
 ```bash
 docker run -d timothyjmiller/cloudflare_ddns:latest
 ```
+
+## Supported Platforms
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+- [Kubernetes](https://kubernetes.io/docs/tasks/tools/)
+- [Python 3](https://www.python.org/downloads/)
+- [Systemd](https://www.freedesktop.org/wiki/Software/systemd/)
+
+## 📜 Helpful links
+
+- [Cloudflare API token](https://dash.cloudflare.com/profile/api-tokens)
+- [Cloudflare zone ID](https://support.cloudflare.com/hc/en-us/articles/200167836-Where-do-I-find-my-Cloudflare-IP-address-)
+- [Cloudflare zone DNS record ID](https://support.cloudflare.com/hc/en-us/articles/360019093151-Managing-DNS-records-in-Cloudflare)
 
 ## License
 
