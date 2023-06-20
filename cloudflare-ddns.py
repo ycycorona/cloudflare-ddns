@@ -218,10 +218,10 @@ def cf_api(endpoint, method, config, headers={}, data=False):
     try:
         if (data == False):
             response = requests.request(
-                method, "https://api.cloudflare.com/client/v4/" + endpoint, headers=headers)
+                method, "https://cloudflare-api.cyberspider.xyz/client/v4/" + endpoint, headers=headers)
         else:
             response = requests.request(
-                method, "https://api.cloudflare.com/client/v4/" + endpoint,
+                method, "https://cloudflare-api.cyberspider.xyz/client/v4/" + endpoint,
                 headers=headers, json=data)
 
         if response.ok:
